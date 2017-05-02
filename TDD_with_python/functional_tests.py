@@ -1,6 +1,48 @@
 from selenium import webdriver
-# System.setProperty("webdriver.gecko.driver","D:\env\Python\Python36-32\Scripts\geckodriver.exe")
-browser = webdriver.Firefox()
-# browser.get('http://localhost:8080')
-browser.get('http://127.0.0.1:8000/')
-assert 'Django' in browser.title
+import unittest
+
+
+class NewVisitorTest(unittest.TestCase): #inheritance
+    def setUp(self):
+        self.browser = webdriver.Firefox()
+        self.browser.implicitly_wait(3)
+
+    def tearDown(self):
+        self.browser.quit()
+
+    # Any method whose name starts with test_ is a test method
+    def test_can_start_a_list_and_retrieve_it_later(self):
+
+        # Edith checks out homepage
+        # browser.get('http://localhost:8080')
+        self.browser.get('http://127.0.0.1:8000/')
+
+        # She notices the page title and header mention to-do lists
+        self.assertIn('To-Do',self.browser.title)
+        self.fail('Finish the test!') # reminds to finish the test
+        # assert 'To-Do' in self.browser.title, "Browser title was " + self.browser.title
+
+        # She is invited to enter a to-do item straight away
+
+        # She types "Buy peacock feathers" into a text box (Edith's hobby
+        # is tying fly-fishing lures)
+
+        # When she hits enter, the page updates, and now the page lists
+        # "1: Buy peacock feathers" as an item in a to-do list
+
+        # There is still a text box inviting her to add another item. She
+        # enters "Use peacock feathers to make a fly" (Edith is very methodical)
+
+        # The page updates again, and now shows both items on her list
+
+        # Edith wonders whether the site will remember her list. Then she sees
+        # that the site has generated a unique URL for her -- there is some
+        # explanatory text to that effect.
+
+        # She visits that URL - her to-do list is still there.
+
+        # Satisfied, she goes back to sleep
+
+#checks if script was executed from cmd rather than imported by another script
+if __name__ == '__main__':
+    unittest.main(warnings='ignore') #launches unittest test runner ; warnings?
